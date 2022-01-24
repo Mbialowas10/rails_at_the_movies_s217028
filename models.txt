@@ -9,3 +9,12 @@ movies_genres Table (joiner table)
 
 Genres Table (many to many with movies)
 - id, Name
+
++++++++++++++++++++++++++++++++++++++++++++++++++
+Routing Information
++++++++++++++++++++++++++++++++++++++++++++++++++
+GET /
+GET /Movies
+GET /Movies/:id
+GET /Production_Companies
+GET /production_companies/:id

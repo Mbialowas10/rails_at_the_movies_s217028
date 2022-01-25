@@ -1,2 +1,14 @@
-<h1>ProductionCompanies#show</h1>
-<p>Find me in app/views/production_companies/show.html.erb</p>
+<h2 class="title is-2">Movies made by <%= @production_company.name %></h2>
+
+<p class='mb-5'>
+  This production company made <%= @production_company.movies.count %> of the top 100 movies.
+</p>
+<ul >
+
+  <% @production_company.movies.each do |movie| %>
+  <li><%= link_to movie.title, movie %> with rating of <%= movie.average_vote %></li>
+  <% end %>
+</ul>
+
+
+

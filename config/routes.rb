@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  resources :pages, except: [:show]
+
+  get '/pages/:permalink' => "pages#permalink", as: 'permalink'
   #get 'home/index'
   # get 'production_companies/index'
   # get 'production_companies/show'

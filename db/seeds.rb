@@ -3,6 +3,7 @@ require "csv"
 #Some clean up
 Movie.delete_all
 ProductionCompany.delete_all
+Page.delete_all
 
 filename = Rails.root.join("db/top_movies.csv") # build out the absolute path to file
 puts "Loading Movie the CSV file: #{filename}"
@@ -38,4 +39,15 @@ puts "Created #{ProductionCompany.count} Production Companies"
 puts "Created #{Movie.count} Moives."
 
 puts "#{ProductionCompany.all.inspect}"
-puts "#{Movies.all.inspect}"
+#puts "#{Movies.all.inspect}"
+
+Page.create(
+    title: 'About the Data',
+    content: 'The data powering this lovely website was provided by IMDB Kaggle Dataset.',
+    permalink: "about"
+)
+Page.create(
+    title: 'Contact Us',
+    content: 'If you like this site and want to chat about the project or the data, email me at: obviously_faker@email.com',
+    permalink: "contact"
+)

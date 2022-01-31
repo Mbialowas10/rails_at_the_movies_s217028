@@ -1,11 +1,6 @@
 <h1>Production Companies</h1>
 <!-- p>Find me in app/views/production_companies/index.html.erb</p -->
 <ol>
-  <% @production_companies.each do |company|%>
-    <li>
-			<%= link_to company.name, company %>
-			<em>(<%= pluralize company.movie_count, "Top Movie" %> )</em>
-		</li>
-  <% end %>
+  <%= render @production_companies %>
 </ol>
 

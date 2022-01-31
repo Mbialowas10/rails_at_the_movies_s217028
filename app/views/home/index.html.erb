@@ -11,17 +11,19 @@
         </li>
       <% end %>
     </ol>
+    <p class="mt-5">
+      <strong><%= link_to '👉 See the Top 100 Movies', movies_path %></strong>
+    </p>
+
   </div>
 
   <div class="column">
-    <h2 class="title is-2">Top 10 Production Companies</h2>
+  <h2 class="title is-2">Top 10 Production Companies</h2>
     <ol class="ml-5">
-      <% @production_companies.each do |production_company| %>
-        <li>
-          <%= link_to production_company.name, production_company %>
-			<em>(<%= pluralize production_company.movie_count, "Top Movie" %> )</em>
-        </li>
-      <% end %>
+      <%= render @production_companies %>
     </ol>
+    <p class="mt-5">
+      <strong><%= link_to '👉 See the Top Production Companies', production_companies_path %></strong>
+    </p>
   </div>
 </div>

@@ -10,4 +10,7 @@ class Movie < ApplicationRecord
   validates :year, :duration, numericality: {only_integer: true}
   validates :average_vote, numericality: true
 
+  def genres_list
+    self.genres.map(&:name).join(",")
+  end
 end

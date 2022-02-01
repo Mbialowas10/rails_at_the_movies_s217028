@@ -5,6 +5,9 @@ Movie.delete_all
 ProductionCompany.delete_all
 Page.delete_all
 
+MovieGenre.delete_all
+Genre.delete_all
+
 filename = Rails.root.join("db/top_movies.csv") # build out the absolute path to file
 puts "Loading Movie the CSV file: #{filename}"
 
@@ -29,7 +32,18 @@ movies.each do |m|
       average_vote: m["avg_vote"]
     )
     #clear
-    puts "Invalid movie #{m['original_title']}" unless movie&.valid?
+    unless movie&.valid?
+      puts "Invalid movie #{m['original_title']}"
+      next
+    end
+    genres = m["genre"].split(",").map(&:strip)
+    genres.each do |genre_name|
+      genre = Genre.find_or_create_by(name: genre_name)
+
+      #since the joiner table references the other 2 tables, we can just pass the objects:
+      MovieGenre.create(movie: movie, genre: genre)
+    end
+
   else
     puts "invalid production company #{m["production_company"]} for movie #{m["original_title"]}."
   end
@@ -37,8 +51,9 @@ end
 
 puts "Created #{ProductionCompany.count} Production Companies"
 puts "Created #{Movie.count} Moives."
-
-puts "#{ProductionCompany.all.inspect}"
+puts "Created #{Genre.count} Genres"
+puts "Created #{MovieGenre.count} Movie Genres"
+#puts "#{ProductionCompany.all.inspect}"
 #puts "#{Movies.all.inspect}"
 
 Page.create(

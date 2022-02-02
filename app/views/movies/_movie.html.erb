@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <p>
     <strong>
     <% if show_link %>
@@ -9,6 +10,17 @@
   </p>
 <article class="message is-dark">
 
+=======
+<h2 class="title is-2">
+  <%if show_link %>
+    <%= link_to movie.title, movie %>
+  <% else %>
+    <%=movie.title %>
+  <%end %>
+</h2>
+
+<article class="message is-dark">
+>>>>>>> railsAtTheMovies-EOD-Jan26,2022
   <div class="message-header">
     <p>Description</p>
   </div>
@@ -25,6 +37,17 @@
   <%= movie.average_vote %>
 </p>
 <p>
+<<<<<<< HEAD
+=======
+  <strong>Genres: </strong>
+  <%= movie.genres_list %>
+</p>
+<p>
+  <strong>Production Company: </strong>
+  <%= link_to movie.production_company.name, movie.production_company %>
+</p>
+<p>
+>>>>>>> railsAtTheMovies-EOD-Jan26,2022
   <strong>Release Year:</strong>
   <%= movie.year %>
 </p>
@@ -32,8 +55,13 @@
   <strong>Duration:</strong>
   <%= movie.duration %>
 </p>
+<<<<<<< HEAD
 <p>
   <strong>Production Company:</strong>
   <%= link_to movie.production_company.name, movie.production_company %>
 </p>
 <hr>
+=======
+<hr>
+
+>>>>>>> railsAtTheMovies-EOD-Jan26,2022

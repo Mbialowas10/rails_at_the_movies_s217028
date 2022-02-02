@@ -3,6 +3,11 @@ require "csv"
 #Some clean up
 Movie.delete_all
 ProductionCompany.delete_all
+Page.delete_all
+
+# data for many-to-many relationship
+MovieGenre.delete_all
+Genre.delete_all
 
 filename = Rails.root.join("db/top_movies.csv") # build out the absolute path to file
 puts "Loading Movie the CSV file: #{filename}"
@@ -27,15 +32,41 @@ movies.each do |m|
       description: m["description"],
       average_vote: m["avg_vote"]
     )
-    #clear
-    puts "Invalid movie #{m['original_title']}" unless movie&.valid?
+
+    # end our genre creation
+    unless movie&.valid?
+      puts "Invalid movie #{m['original_title']}"
+      next
+    end
+
+    # create our genres in this space
+    genres = m["genre"].split(",").map(&:strip) # { | collection_item | collection_item.strip }
+
+    genres.each do |genre_name|
+      genre = Genre.find_or_create_by(name: genre_name)
+
+      MovieGenre.create(movie: movie, genre:genre)
+    end
   else
     puts "invalid production company #{m["production_company"]} for movie #{m["original_title"]}."
   end
 end
 
 puts "Created #{ProductionCompany.count} Production Companies"
-puts "Created #{Movie.count} Moives."
+puts "Created #{Movie.count} Movies."
+puts "Created #{Genre.count} Genres"
+puts "Created #{MovieGenre.count} Movie Genres"
 
-puts "#{ProductionCompany.all.inspect}"
-puts "#{Movies.all.inspect}"
+#puts "#{ProductionCompany.all.inspect}"
+#puts "#{Movies.all.inspect}"
+
+Page.create(
+    title: 'About the Data',
+    content: 'The data powering this lovely website was provided by IMDB Kaggle Dataset.',
+    permalink: "about"
+)
+Page.create(
+    title: 'Contact Us',
+    content: 'If you like this site and want to chat about the project or the data, email me at: obviously_faker@email.com',
+    permalink: "contact"
+)

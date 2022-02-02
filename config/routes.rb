@@ -1,6 +1,12 @@
 Rails.application.routes.draw do
   resources :pages, except: [:show]
 
+  resources :movies, only: [:index, :show] do
+    collection do
+      get "search"
+    end
+  end
+
   get '/pages/:permalink' => "pages#permalink", as: 'permalink'
   #get 'home/index'
   # get 'production_companies/index'

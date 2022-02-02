@@ -1,12 +1,13 @@
 require "csv"
 
 #Some clean up
+MovieGenre.delete_all
 Movie.delete_all
 ProductionCompany.delete_all
 Page.delete_all
 
 # data for many-to-many relationship
-MovieGenre.delete_all
+
 Genre.delete_all
 
 filename = Rails.root.join("db/top_movies.csv") # build out the absolute path to file

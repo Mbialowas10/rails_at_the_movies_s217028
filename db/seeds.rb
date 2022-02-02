@@ -5,7 +5,10 @@ Movie.delete_all
 ProductionCompany.delete_all
 Page.delete_all
 
+<<<<<<< HEAD
 # data for many-to-many relationship
+=======
+>>>>>>> manyToMany
 MovieGenre.delete_all
 Genre.delete_all
 
@@ -32,12 +35,17 @@ movies.each do |m|
       description: m["description"],
       average_vote: m["avg_vote"]
     )
+<<<<<<< HEAD
 
     # end our genre creation
+=======
+    #clear
+>>>>>>> manyToMany
     unless movie&.valid?
       puts "Invalid movie #{m['original_title']}"
       next
     end
+<<<<<<< HEAD
 
     # create our genres in this space
     genres = m["genre"].split(",").map(&:strip) # { | collection_item | collection_item.strip }
@@ -47,16 +55,32 @@ movies.each do |m|
 
       MovieGenre.create(movie: movie, genre:genre)
     end
+=======
+    genres = m["genre"].split(",").map(&:strip)
+    genres.each do |genre_name|
+      genre = Genre.find_or_create_by(name: genre_name)
+
+      #since the joiner table references the other 2 tables, we can just pass the objects:
+      MovieGenre.create(movie: movie, genre: genre)
+    end
+
+>>>>>>> manyToMany
   else
     puts "invalid production company #{m["production_company"]} for movie #{m["original_title"]}."
   end
 end
 
 puts "Created #{ProductionCompany.count} Production Companies"
+<<<<<<< HEAD
 puts "Created #{Movie.count} Movies."
 puts "Created #{Genre.count} Genres"
 puts "Created #{MovieGenre.count} Movie Genres"
 
+=======
+puts "Created #{Movie.count} Moives."
+puts "Created #{Genre.count} Genres"
+puts "Created #{MovieGenre.count} Movie Genres"
+>>>>>>> manyToMany
 #puts "#{ProductionCompany.all.inspect}"
 #puts "#{Movies.all.inspect}"
 

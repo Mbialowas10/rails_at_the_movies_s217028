@@ -10,7 +10,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
+<<<<<<< HEAD
 ActiveRecord::Schema.define(version: 2022_02_01_212954) do
+=======
+ActiveRecord::Schema.define(version: 2022_02_01_194701) do
+>>>>>>> manyToMany
 
   create_table "genres", force: :cascade do |t|
     t.string "name"
